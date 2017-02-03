@@ -1,0 +1,7 @@
+/**
+
+ */
+
+var SplashState = function () {
+    
+};
