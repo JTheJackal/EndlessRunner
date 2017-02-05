@@ -1,11 +1,15 @@
 /**
+ * Created by Adam Walker and Joshua Styles
  * Player Object
  *
  * Changes :
  * Velocity added to prevent player moving backwards except after hitting wall.
- * hitGround method added as a callback for collision between player and ground. This will signal when player is allowed to jump.
+ * hitGround function added as a callback for collision between player and ground. This will signal when player is allowed to jump.
+ * Removed applyGravity function as it is no longer needed.
+ * Commented out console.log in controlx function. It is being called in update() and causing skips in framerate.
+ * Sped up backwards rotation a little to look a bit more realistic.
  *
- * Bugs : Collision between player and ground seems to be happening too late causing them to overlap and thusprevent jumping.
+ * Bugs : 
  * 
  */
 
@@ -39,15 +43,8 @@ var Player = function(x, y){
     this.sprite.anchor.x = 0.5;
     this.sprite.anchor.y = 0.5;
 
-    //Make the player velocity the inverse of the level speed to prevent constantly moving backwards.
-    //this.sprite.body.velocity.x = LEVELSPEEDX * -1;
     this.sprite.body.allowGravity = true;
     this.sprite.body.immovable = false;
-};
-
-//Apply Gravity
-Player.prototype.applyGravity = function(){
-    this.sprite.y += this.velY;
 };
 
 //Ascend Helicopter Sprite
@@ -57,13 +54,15 @@ Player.prototype.ascend = function(){
 
 //Control left & right movement of helicopter
 Player.prototype.controlX = function (key) {
-    console.log(key);
+    
+    //console.log(key);
+    
     switch(key){
         case "LeftKey":
             //Caluclate new velocity
             if(this.sprite.x>this.minX){
                 this.velX = -40;
-                this.rotation--;
+                this.rotation -= 3;
             }else{
                 this.velX = 0;
                 this.rotation++;

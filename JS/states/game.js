@@ -1,4 +1,5 @@
 /**
+ * Created by Adam Walker and Joshua Styles
  * Initialise the game
  *
  * Changes:

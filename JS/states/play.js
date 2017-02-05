@@ -1,12 +1,20 @@
 /**
- * Created by Adam on 31/01/2017.
+ * Created by Adam Walker and Joshua Styles on 31/01/2017.
+ *
+ * Changes:
+ *
+ *
  */
+
 var PlayState = {
+    
     handleInput: function () {
+        
         //Check to if helicopter needs to ascend.
         if (this.jumpKey.isDown) {
             this.player.ascend();
         }
+        
         //Check if helicopter needs to move
         if(this.cursors.left.isDown){
             this.player.controlX("LeftKey")
@@ -20,6 +28,20 @@ var PlayState = {
             this.player.controlX("none")
         }
     },
+    
+    handleCollisions: function () {
+        
+        //Check all terrain sprites against helicopter sprite for a collision.
+        for(var i = 0; i < this.level.groundArray.length; i++){
+            
+            game.physics.arcade.collide(this.player.sprite, this.level.groundArray[i].sprite);
+            game.physics.arcade.collide(this.player.sprite, this.level.roofArray[i].sprite);
+            
+            //To handle the collision ourselves i.e. have the helicopter explode, use a callback like below.
+            //game.physics.arcade.collide(this.player.sprite, this.level.groundArray[i].sprite, null, mycustomCallback);
+        }
+    },
+    
     create: function () {
 
         //Create Objects
@@ -38,6 +60,7 @@ var PlayState = {
         //Apply Physics
         game.physics.arcade.gravity.y = 200;
     },
+    
     update: function () {
 
         //Update Level
@@ -46,6 +69,7 @@ var PlayState = {
         this.handleInput();
 
         //Check for collisions
+        this.handleCollisions();
 
         //Display level Distance
         this.LevelDistance.setText("Distance = " + this.level.getLevelDistance() + "m");
