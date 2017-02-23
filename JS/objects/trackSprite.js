@@ -1,4 +1,5 @@
 /**
+ * Created by Adam Walker and Joshua Styles
  * Object for sprites of the map.
  *
  * Changes:
@@ -59,11 +60,6 @@ TrackSprite.prototype.setPosition = function(x, y){
 
 //Move posisition of sprite
 TrackSprite.prototype.movePosition = function(speedX, speedY){
-    
-    /*
-    this.sprite.x += speedX;
-    this.sprite.y += speedY;
-    */
     
     this.sprite.body.velocity.x = speedX;
 };
