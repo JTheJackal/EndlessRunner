@@ -34,12 +34,14 @@ var PlayState = {
     gameOver: function(){
         
         PlayState.player.endGame(function () {
+
             //Reset game.
             LEVELSPEEDX = -80;
             game.state.start(STATES.LOAD);
         });
     },
     
+
     gameSpeed: function(){
         
         var levelDistance = this.level.getLevelDistance();
@@ -50,7 +52,7 @@ var PlayState = {
             LEVELSPEEDX -= 5;
         }
     },
-    
+
     handleCollisions: function () {
         
         //Check all terrain sprites against helicopter sprite for a collision.
@@ -70,7 +72,9 @@ var PlayState = {
         this.player = new Player(game.world.width / 2, game.world.height / 2);
         this.level = new Level();
         this.UIGroup = game.add.group();
+
         this.previousDistance = 0;
+
         //Display level Distance
         this.LevelDistance = game.add.text(10, 10, "Distance = " + this.level.getLevelDistance() + "m", {
             font: "24px Courier",
