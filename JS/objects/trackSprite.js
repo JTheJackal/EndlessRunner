@@ -64,8 +64,6 @@ var TrackSprite = function(x, y) {
 TrackSprite.prototype.setPosition = function(x, y){
     this.sprite.x = x;
     this.sprite.y = y;
-
-    console.log("Setting Posistion")
 };
 
 //Move posisition of sprite

@@ -15,15 +15,16 @@ var Level = function () {
     this.TRACKPIECENUM = 15;
     this.groundArray = [];
     this.roofArray = [];
+    this.offset = 1;
 
     //initLevel - Add level sprites to the array & update sprite Location
     for(var i = 0; i<this.TRACKPIECENUM;i++){
         this.groundArray.push(new TrackSprite(0,0));
-        this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() - 1),game.world.height - this.groundArray[i].getHeight());
+        this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() -  this.offset),game.world.height - this.groundArray[i].getHeight());
         
         //Add sprites to roof array.
         this.roofArray.push(new TrackSprite(0,0));
-        this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - 1), 0);
+        this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - this.offset), 0);
     }
 
     this.levelDistance = 0;
@@ -31,31 +32,52 @@ var Level = function () {
 
 //Update the level
 Level.prototype.updateLevel = function () {
+    //Variables to prevent using repeated calls
     var length = this.groundArray.length;
+    var width = this.groundArray[length-2].getWidth();
+    var newPieceGenerated = false;
+    
     for(var i = 0;i<length;i++){
-
-        this.groundArray[i].movePosition(LEVELSPEEDX,LEVELSPEEDY);
 
         //Check Posistion and regenerate if need be.
         if(this.groundArray[i].getX() <= 0 - this.groundArray[i].getWidth()){
 
             this.groundArray.splice(i,1);
             this.groundArray.push( new TrackSprite(0,0));
-            this.groundArray[length-1].setPosition(this.groundArray[length-2].getX()+ (this.groundArray[length-2].getWidth() -2), game.world.height - this.groundArray[length-1].getHeight());
+            //this.groundArray[length-1].setPosition(this.groundArray[length-2].getX()+ (this.groundArray[length-2].getWidth() - this.offset), game.world.height - this.groundArray[length-1].getHeight());
+            //this.groundArray[length-1].setPosition(this.groundArray[length-2].getX()+ (width), game.world.height - this.groundArray[length-1].getHeight());
+            newPieceGenerated = true;
         }
-        
-        this.roofArray[i].movePosition(LEVELSPEEDX, LEVELSPEEDY);
 
         //Check position and regenerate if need be.
         if(this.roofArray[i].getX() <= 0 - this.roofArray[i].getWidth()){
 
             this.roofArray.splice(i,1);
             this.roofArray.push(new TrackSprite(0,0));
-            this.roofArray[length-1].setPosition(this.roofArray[length-2].getX()+(this.roofArray[length-2].getWidth() -2), 0);
+            //this.roofArray[length-1].setPosition(this.roofArray[length-2].getX()+(this.roofArray[length-2].getWidth() - this.offset), 0);
+            //this.roofArray[length-1].setPosition(this.roofArray[length-2].getX()+(width), 0);
+            newPieceGenerated = true;
             
             //Update Level Distance
             this.levelDistance++;
         }
+    }
+    
+    //Ensure all terrain sprites are positioned correctly without spacing.
+    if(newPieceGenerated){
+        
+        for(var j = 1; j < length; j++){
+
+            this.groundArray[j].setPosition(this.groundArray[j-1].getX() + (width - this.offset), game.world.height - this.groundArray[j].getHeight());
+            this.roofArray[j].setPosition(this.roofArray[j-1].getX() + (width - this.offset), 0);
+        }
+    }
+    
+    //Move the terrain.
+    for(var k = 0; k < length; k++){
+        
+        this.roofArray[k].movePosition(LEVELSPEEDX, LEVELSPEEDY);
+        this.groundArray[k].movePosition(LEVELSPEEDX,LEVELSPEEDY);
     }
 };
 
