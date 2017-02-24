@@ -14,6 +14,8 @@ var LoadState = {
         game.load.image("medium", "GFX/medium.png");
         game.load.image("big", "GFX/big.png");
         game.load.image("xBig", "GFX/xBig.png");
+        game.load.image("xxBig", "GFX/xxBig.png");
+        game.load.image("xxxBig", "GFX/xxxBig.png");
         game.load.audio("helicopter","SFX/helicopter.mp3");
         game.load.audio("explosionSound","SFX/explosion.mp3");
         game.load.spritesheet("explosion","GFX/explosion.png",64,64,16);

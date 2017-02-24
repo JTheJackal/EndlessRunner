@@ -59,7 +59,7 @@ Player.prototype.controlX = function (key) {
     
     switch(key){
         case "LeftKey":
-            //Caluclate new velocity
+            //Calculate new velocity
             if(this.sprite.x>this.minX){
                 this.velX = -40;
                 this.rotation -= 3;
@@ -69,7 +69,7 @@ Player.prototype.controlX = function (key) {
             }
             break;
         case "RightKey":
-            //Caluclate new velocity
+            //Calculate new velocity
             if(this.sprite.x<this.maxX){
                 this.velX = 40;
             }else{

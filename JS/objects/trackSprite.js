@@ -12,7 +12,7 @@
 var TrackSprite = function(x, y) {
 
     //Generate Random Number for sprite
-    var selector = Math.floor(Math.random() * 3);
+    var selector = Math.floor(Math.random() * 5);
 
     //Get the X & Y for the object
     this.x = x;
@@ -40,6 +40,16 @@ var TrackSprite = function(x, y) {
 
             this.sprite = game.add.sprite(this.x, this.y, "xBig");
             break;
+        
+        case 4:
+
+            this.sprite = game.add.sprite(this.x, this.y, "xxBig");
+            break;
+            
+        case 5:
+
+            this.sprite = game.add.sprite(this.x, this.y, "xxxBig");
+            break;
     }
 
     //Enable physics for the sprite. Allows collision detection.
@@ -54,8 +64,6 @@ var TrackSprite = function(x, y) {
 TrackSprite.prototype.setPosition = function(x, y){
     this.sprite.x = x;
     this.sprite.y = y;
-
-    console.log("Setting Posistion")
 };
 
 //Move posisition of sprite
