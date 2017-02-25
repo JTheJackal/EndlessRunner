@@ -102,7 +102,7 @@ Player.prototype.endGame = function (onAnimationComplete) {
     var x = this.sprite.x;
     var y = this.sprite.y;
 
-    this.sprite.visible = false;
+    this.sprite.kill();
 
     //Set properties for explosion animation and play it.
     var explosion = game.add.sprite(x,y,"explosion");
@@ -116,4 +116,6 @@ Player.prototype.endGame = function (onAnimationComplete) {
     //set properties for explosion sound & play it.
     var sfx = game.add.audio("explosionSound");
     sfx.play();
+
+
 };

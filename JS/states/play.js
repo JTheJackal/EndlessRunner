@@ -20,22 +20,14 @@ var PlayState = {
             this.player.controlX("LeftKey")
         }else if(this.cursors.right.isDown){
             this.player.controlX("RightKey")
-        }else if(this.cursors.up.isDown) {
-            /*
-            this.player.endGame(function () {
-                game.state.start(STATES.LOAD);
-            })
-            */
         } else{
             this.player.controlX("none")
         }
     },
     
     gameOver: function(){
-        
-        PlayState.player.endGame(function () {
-
-            //Reset game.
+        PlayState.player.endGame(function ()
+        {//Reset game.
             LEVELSPEEDX = -80;
             game.state.start(STATES.LOAD);
         });
@@ -47,7 +39,6 @@ var PlayState = {
         var levelDistance = this.level.getLevelDistance();
         
         if(levelDistance % 10 === 0 && levelDistance != 0 && levelDistance === PlayState.previousDistance + 10){
-            
             PlayState.previousDistance = levelDistance;
             LEVELSPEEDX -= 5;
         }
@@ -72,6 +63,7 @@ var PlayState = {
         this.player = new Player(game.world.width / 2, game.world.height / 2);
         this.level = new Level();
         this.UIGroup = game.add.group();
+        this.endGame = false;
 
         this.previousDistance = 0;
 
