@@ -16,14 +16,15 @@ var Level = function () {
     this.groundArray = [];
     this.roofArray = [];
     this.offset = 1;
+    this.currentState = "Easy";
 
     //initLevel - Add level sprites to the array & update sprite Location
     for(var i = 0; i<this.TRACKPIECENUM;i++){
-        this.groundArray.push(new TrackSprite(0,0));
+        this.groundArray.push(new TrackSprite(0,0, this.currentState));
         this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() -  this.offset),game.world.height - this.groundArray[i].getHeight());
         
         //Add sprites to roof array.
-        this.roofArray.push(new TrackSprite(0,0));
+        this.roofArray.push(new TrackSprite(0,0, this.currentState));
         this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - this.offset), 0);
     }
 
@@ -43,9 +44,7 @@ Level.prototype.updateLevel = function () {
         if(this.groundArray[i].getX() <= 0 - this.groundArray[i].getWidth()){
 
             this.groundArray.splice(i,1);
-            this.groundArray.push( new TrackSprite(0,0));
-            //this.groundArray[length-1].setPosition(this.groundArray[length-2].getX()+ (this.groundArray[length-2].getWidth() - this.offset), game.world.height - this.groundArray[length-1].getHeight());
-            //this.groundArray[length-1].setPosition(this.groundArray[length-2].getX()+ (width), game.world.height - this.groundArray[length-1].getHeight());
+            this.groundArray.push( new TrackSprite(0,0, this.currentState));
             newPieceGenerated = true;
         }
 
@@ -53,9 +52,7 @@ Level.prototype.updateLevel = function () {
         if(this.roofArray[i].getX() <= 0 - this.roofArray[i].getWidth()){
 
             this.roofArray.splice(i,1);
-            this.roofArray.push(new TrackSprite(0,0));
-            //this.roofArray[length-1].setPosition(this.roofArray[length-2].getX()+(this.roofArray[length-2].getWidth() - this.offset), 0);
-            //this.roofArray[length-1].setPosition(this.roofArray[length-2].getX()+(width), 0);
+            this.roofArray.push(new TrackSprite(0,0, this.currentState));
             newPieceGenerated = true;
             
             //Update Level Distance
