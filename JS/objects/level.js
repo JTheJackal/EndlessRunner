@@ -18,12 +18,15 @@ function getRandomInt(min, max) {
 
 
 var LevelPiece = function (x,y,imgRef,rotation) {
+    //Anchor is set to the middle for rotation, important when it comes to having our actual graphics.
     this.offsetX = 32;
     this.offsetY = 16;
+
 
     //Set properties of the object
     this.x = x + this.offsetX;
     this.y = y + this.offsetY;
+
     this.imgRef = imgRef;
     this.rotation = rotation;
 
@@ -46,7 +49,7 @@ var LevelPiece = function (x,y,imgRef,rotation) {
     this.sprite.body.velocity.x = LEVELSPEEDX;
 };
 
-
+//Level strip object
 var LevelStrip = function (x, y, isObstacle) {
     this.blocks = [];
 
@@ -56,14 +59,17 @@ var LevelStrip = function (x, y, isObstacle) {
     this.y = y;
     this.isObstacle = isObstacle;
 
+    //Check to see if the strip is to be an obstacle
     if(this.isObstacle){
         this.generateObstacle();
     }else{
+        //Create Non obstacle
         this.blocks[0] = new LevelPiece(this.x,this.y,"base",0);
         this.blocks[1] = new LevelPiece(this.x,gameHeight - 32,"base",180);
     }
 };
 
+//Generate an  obstacle strip.
 LevelStrip.prototype.generateObstacle = function () {
     var rndBlocks = getRandomInt(8,12);
     var rndTopBlocks = getRandomInt(2,rndBlocks);
@@ -90,11 +96,13 @@ LevelStrip.prototype.generateObstacle = function () {
 
 };
 
+//Update the level strip
 LevelStrip.prototype.update = function () {
     this.y = this.blocks[0].sprite.body.y;
     this.x = this.blocks[0].sprite.body.x;
 };
 
+//Check the collision
 LevelStrip.prototype.checkCollision = function (playerSprite,onCollide) {
     for (var i = 0; i <this.blocks.length; i++){
         console.log("Checking Collision");
@@ -154,6 +162,8 @@ Level.prototype.handleCollision = function (playerSprite,onCollide) {
         this.levelStrips[i].checkCollision(playerSprite,onCollide);
     }
 };
+
+
 /*
 var Level = function () {
     //properties
