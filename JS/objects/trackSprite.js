@@ -9,10 +9,29 @@
  *
  */
 
-var TrackSprite = function(x, y) {
+var TrackSprite = function(x, y, currentState) {
 
-    //Generate Random Number for sprite
-    var selector = Math.floor(Math.random() * 5);
+    //Generate Random Number for sprite depending on the current state
+    var selector;
+    
+    switch (currentState) {
+            
+            
+        case "Easy":
+            
+            selector = Math.floor(Math.random() * 3);
+            break;
+            
+        case "Medium": 
+            
+            selector = Math.floor(Math.random() * 4);
+            break;
+            
+        case "Hard": 
+            
+            selector = Math.floor(Math.random() * 5);
+            break;     
+    }
 
     //Get the X & Y for the object
     this.x = x;
