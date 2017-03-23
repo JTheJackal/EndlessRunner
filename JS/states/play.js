@@ -24,15 +24,29 @@ var PlayState = {
             this.player.controlX("none")
         }
     },
-    
-
-    gameSpeed: function(){
+   
+    gameDifficulty: function(){
         
         var levelDistance = this.level.getLevelDistance();
         
+        //Every 10m, increase the speed.
         if(levelDistance % 10 === 0 && levelDistance != 0 && levelDistance === PlayState.previousDistance + 10){
             PlayState.previousDistance = levelDistance;
             LEVELSPEEDX -= 5;
+        }
+        
+        //Increase the types of sprites used at set distances.
+        switch(levelDistance){
+                
+            case 30:
+                
+                this.level.currentState = "Medium";
+                break;
+                
+            case 60:
+                
+                this.level.currentState = "Hard";
+                break;
         }
     },
 
@@ -100,10 +114,10 @@ var PlayState = {
         this.handleCollisions();
         
         //Handle the difficulty level
-        this.gameSpeed();
+        this.gameDifficulty();
 
         //Display level Distance
-        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m\n" + "Speed: " + LEVELSPEEDX);
+        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m\n" + "Speed: " + LEVELSPEEDX + "\nDifficulty: " + this.level.currentState);
         
         //Make the UI group always on top.
         game.world.bringToTop(this.UIGroup);

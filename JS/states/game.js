@@ -24,7 +24,8 @@ const STATES = {
 //global variables
 var gameWidth = 800;
 var gameHeight = 600;
-var LEVELSPEEDX = -80;
+var LEVELSPEEDX = -110;
+const ORIGSPEEDX = LEVELSPEEDX;
 const LEVELSPEEDY = 0;
 
 //Create an instance of the game.
