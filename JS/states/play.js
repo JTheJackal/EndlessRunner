@@ -63,16 +63,10 @@ var PlayState = {
     handleCollisions: function () {
         
         //Check all terrain sprites against helicopter sprite for a collision.
-        for(var i = 0; i < this.level.groundArray.length; i++){
-            
-            game.physics.arcade.collide(this.player.sprite, this.level.groundArray[i].sprite, null, this.gameOver);
-            game.physics.arcade.collide(this.player.sprite, this.level.roofArray[i].sprite, null, this.gameOver);
-            
-            //To handle the collision ourselves i.e. have the helicopter explode, use a callback like below.
-            //game.physics.arcade.collide(this.player.sprite, this.level.groundArray[i].sprite, null, mycustomCallback);
-        }
+        this.level.handleCollision(this.player.sprite,this.gameOver);
+
     },
-    
+
     create: function () {
 
         //Create Objects
