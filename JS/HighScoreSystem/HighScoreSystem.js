@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 
 
 //Object for highscores
-var HighScoreSystem = function () {
+var HighScoreSystem = function (callback) {
     //Sign the user in anonymously
     firebase.auth().signInAnonymously();
 
@@ -28,14 +28,19 @@ var HighScoreSystem = function () {
 
     //Fills high scores with call back from firebase
     var getHighScores = function (snapshot) {
-        console.log("Getting data")
+        console.log("Getting data");
         var i = 0;
         snapshot.forEach(function (child) {
             highScores[i] = child.val();
             i++;
         });
 
-        orderHighScores()
+        orderHighScores();
+
+        if(callback){
+            callback(getTopTenScores())
+        }
+
     };
 
     //order the high scores
@@ -58,11 +63,15 @@ var HighScoreSystem = function () {
 
     //Check to see if a score is in the top ten scores.
     this.isHighScore = function (score) {
-         return (score >= highScores[9].score);
+        var length = highScores.length - 1;
+        if(score >= highScores[length].score){
+            return true;
+        }else{
+            return false;
+        }
     };
-
     //return the top ten scores
-    this.getTopTenScores = function () {
+    var getTopTenScores = function () {
         var tmpScores = [];
 
         for(var i = 0;i<10;i++){

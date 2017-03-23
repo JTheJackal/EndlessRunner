@@ -16,6 +16,13 @@ var LoadState = {
         game.load.image("xBig", "GFX/xBig.png");
         game.load.image("xxBig", "GFX/xxBig.png");
         game.load.image("xxxBig", "GFX/xxxBig.png");
+        game.load.image("playN","GFX/PlayNormal.png");
+        game.load.image("playH","GFX/PlayHover.png");
+        game.load.image("highScoreN","GFX/highscoresNormal.png");
+        game.load.image("highScoreH","GFX/highscoresHover.png");
+        game.load.image("backN","GFX/BackNormal.png");
+        game.load.image("backH","GFX/backHover.png");
+        game.load.image("bg","GFX/bg.jpg");
         game.load.audio("helicopter","SFX/helicopter.mp3");
         game.load.audio("explosionSound","SFX/explosion.mp3");
         game.load.spritesheet("explosion","GFX/explosion.png",64,64,16);
@@ -26,6 +33,6 @@ var LoadState = {
 
     },
     create: function () {
-        game.state.start(STATES.PLAY);
+        game.state.start(STATES.MENU);
     }
 };
