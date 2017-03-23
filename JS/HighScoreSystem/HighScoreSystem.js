@@ -73,7 +73,6 @@ var HighScoreSystem = function () {
 
         return tmpScores
     };
-
     //Sets the high score in firebase.
     this.setHighScores = function (name,score) {
         scoreRef.child(firebase.auth().currentUser.uid).set({
