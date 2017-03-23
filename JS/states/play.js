@@ -7,7 +7,7 @@
  */
 
 var PlayState = {
-    
+
     handleInput: function () {
         
         //Check to if helicopter needs to ascend.
@@ -24,17 +24,7 @@ var PlayState = {
             this.player.controlX("none")
         }
     },
-    
-    gameOver: function(){
-        PlayState.player.endGame(function ()
-        {
-            //Reset game.
-            LEVELSPEEDX = ORIGSPEEDX;
-            game.state.start(STATES.LOAD);
-        });
-    },
-    
-
+   
     gameDifficulty: function(){
         
         var levelDistance = this.level.getLevelDistance();
@@ -72,6 +62,18 @@ var PlayState = {
             //game.physics.arcade.collide(this.player.sprite, this.level.groundArray[i].sprite, null, mycustomCallback);
         }
     },
+    gameOver: function(){
+        var parent  = PlayState;
+        parent.player.endGame(function () {
+            if(parent.highscoreSystem.isHighScore(parent.level.getLevelDistance())){
+                console.log("HighScore");
+                var name = window.prompt("You got a highscore! Please enter your name:");
+                parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
+            }
+            //Reset game.
+            LEVELSPEEDX = -80;
+            game.state.start(STATES.LOAD);
+        })},
     
     create: function () {
 
@@ -94,6 +96,8 @@ var PlayState = {
         //Create a variable for key press for player jump
         this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.cursors = game.input.keyboard.createCursorKeys();
+
+        this.highscoreSystem = new HighScoreSystem();
 
         //Apply Physics
         game.physics.arcade.gravity.y = 200;
