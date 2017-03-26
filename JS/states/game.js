@@ -17,13 +17,15 @@ const STATES = {
     LOAD:"load.js",
     SPLASH:"splash.js",
     MENU:"menu.js",
-    PLAY:"playState"
+    PLAY:"playState",
+    HIGH_SCORE:"highscore"
 };
 
 //global variables
 var gameWidth = 800;
 var gameHeight = 600;
-var LEVELSPEEDX = -80;
+var LEVELSPEEDX = -110;
+const ORIGSPEEDX = LEVELSPEEDX;
 const LEVELSPEEDY = 0;
 
 //Create an instance of the game.
@@ -32,7 +34,7 @@ var game = new Phaser.Game(gameWidth,gameHeight,Phaser.CANVAS,"canvas");
 //Add states to the game
 game.state.add(STATES.BOOT,BootState);
 game.state.add(STATES.LOAD,LoadState);
-game.state.add(STATES.SPLASH,SplashState);
+game.state.add(STATES.HIGH_SCORE,highscoreState);
 game.state.add(STATES.MENU,MenuState);
 game.state.add(STATES.PLAY,PlayState);
 

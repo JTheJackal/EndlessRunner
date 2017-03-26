@@ -9,47 +9,190 @@
  *
  */
 
-var TrackSprite = function(x, y) {
+var TrackSprite = function(x, y, currentState, upright, previousNum) {
 
-    //Generate Random Number for sprite
-    var selector = Math.floor(Math.random() * 5);
+    /*Generate Random Number for sprite depending on the current state.
+    The do-while loops along with the previousNum arg will ensure no two buildings are placed next
+    to one another.*/
+    
+    this.selector = previousNum;
+    
+    switch (currentState) {
+            
+            
+        case "Easy":
+            
+            do{
+                this.selector = Math.floor(Math.random() * 3);
+            }while(this.selector == previousNum);
+            break;
+            
+        case "Medium": 
+            
+            do{
+                this.selector = Math.floor(Math.random() * 4);
+            }while(this.selector == previousNum);
+            break;
+            
+        case "Hard": 
+            
+            do{
+                this.selector = Math.floor(Math.random() * 6);
+            }while(this.selector == previousNum);
+            break;     
+    }
 
     //Get the X & Y for the object
     this.x = x;
     this.y = y;
 
-    //Check which sprite to use & save it as the sprite
-    switch (selector) {
+    if(upright){
+        //Check which sprite to use & save it as the sprite
+        switch (this.selector) {
 
-        case 0:
+            case 0:
 
-            this.sprite = game.add.sprite(this.x, this.y, "small");
-            break;
+                this.sprite = game.add.sprite(this.x, this.y, "small");
+                break;
 
-        case 1:
+            case 1:
 
-            this.sprite = game.add.sprite(this.x, this.y, "medium");
-            break;
+                this.sprite = game.add.sprite(this.x, this.y, "medium");
+                break;
 
-        case 2:
+            case 2:
 
-            this.sprite = game.add.sprite(this.x, this.y, "big");
-            break;
+                switch(Math.floor(Math.random() * 3)){
 
-        case 3:
+                    case 0:
 
-            this.sprite = game.add.sprite(this.x, this.y, "xBig");
-            break;
+                        this.sprite = game.add.sprite(this.x, this.y, "big");
+                        break;
+
+                    case 1:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "big2");
+                        break;
+
+                    case 2:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "big3");
+                        break;    
+                    }
+
+                break;
+
+            case 3:
+
+                switch(Math.floor(Math.random() * 3)){
+
+                    case 0: 
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig");
+                        break;
+
+                    case 1:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig2");
+                        break;    
+
+                    case 2:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig3");
+                        break;    
+                }
+
+                break;
+
+            case 4:
+
+                this.sprite = game.add.sprite(this.x, this.y, "xxBig");
+                break;
+
+            case 5:
+
+                this.sprite = game.add.sprite(this.x, this.y, "xxxBig");
+                break;
+
+            case 6:
+
+                console.log("Empty selection");
+                break;
+        }
+    }else{
         
-        case 4:
+        //Check which sprite to use & save it as the sprite
+        switch (this.selector) {
 
-            this.sprite = game.add.sprite(this.x, this.y, "xxBig");
-            break;
-            
-        case 5:
+            case 0:
 
-            this.sprite = game.add.sprite(this.x, this.y, "xxxBig");
-            break;
+                this.sprite = game.add.sprite(this.x, this.y, "small_R");
+                break;
+
+            case 1:
+
+                this.sprite = game.add.sprite(this.x, this.y, "medium_R");
+                break;
+
+            case 2:
+
+                switch(Math.floor(Math.random() * 3)){
+
+                    case 0:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "big_R");
+                        break;
+
+                    case 1:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "big2_R");
+                        break;
+
+                    case 2:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "big3_R");
+                        break;    
+                    }
+
+                break;
+
+            case 3:
+
+                switch(Math.floor(Math.random() * 3)){
+
+                    case 0: 
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig_R");
+                        break;
+
+                    case 1:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig2_R");
+                        break;    
+
+                    case 2:
+
+                        this.sprite = game.add.sprite(this.x, this.y, "xBig3_R");
+                        break;    
+                }
+
+                break;
+
+            case 4:
+
+                this.sprite = game.add.sprite(this.x, this.y, "xxBig_R");
+                break;
+
+            case 5:
+
+                this.sprite = game.add.sprite(this.x, this.y, "xxxBig_R");
+                break;
+
+            case 6:
+
+                console.log("Empty selection");
+                break;
+        }
     }
 
     //Enable physics for the sprite. Allows collision detection.
@@ -91,3 +234,8 @@ TrackSprite.prototype.getX = function () {
 TrackSprite.prototype.getY = function () {
     return this.sprite.y;
 };
+
+//Return the randomly generated number for the sprite.
+TrackSprite.prototype.getSpriteNum = function(){
+    return this.selector;
+}

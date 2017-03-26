@@ -39,9 +39,9 @@ var Player = function(x, y){
     //Set Physics properties
     this.sprite.body.bounce.y = 0.2;
 
-    //Set anchor for a smoother roatation
-    this.sprite.anchor.x = 0.5;
-    this.sprite.anchor.y = 0.5;
+    //Set anchor for a smoother roatation - Front of helicopter
+    this.sprite.anchor.x = 0.7;
+    this.sprite.anchor.y = 0.30;
 
     this.sprite.body.allowGravity = true;
     this.sprite.body.immovable = false;
@@ -116,6 +116,5 @@ Player.prototype.endGame = function (onAnimationComplete) {
     //set properties for explosion sound & play it.
     var sfx = game.add.audio("explosionSound");
     sfx.play();
-
 
 };
