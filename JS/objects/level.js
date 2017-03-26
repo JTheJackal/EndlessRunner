@@ -17,6 +17,7 @@ var Level = function () {
     this.roofArray = [];
     this.offset = 1;
     this.currentState = "Easy";
+
     this.droneExists = false;
     this.previousNumGround = null;
     this.previousNumRoof = null;
@@ -24,11 +25,13 @@ var Level = function () {
     //initLevel - Add level sprites to the array & update sprite Location
     for(var i = 0; i<this.TRACKPIECENUM; i++){
         this.groundArray.push(new TrackSprite(0,0, this.currentState, true, this.previousNumGround));
+
         this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() -  this.offset),game.world.height - this.groundArray[i].getHeight());
         this.previousNumGround = this.groundArray[this.groundArray.length-1].getSpriteNum();
         
         //Add sprites to roof array.
         this.roofArray.push(new TrackSprite(0,0, this.currentState, false, this.previousNumRoof));
+
         this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - this.offset), 0);
         this.previousNumRoof = this.roofArray[this.roofArray.length-1].getSpriteNum();
     }
@@ -50,8 +53,10 @@ Level.prototype.updateLevel = function () {
         if(this.groundArray[i].getX() <= 0 - this.groundArray[i].getWidth()){
 
             this.groundArray.splice(i,1);
+
             this.groundArray.push( new TrackSprite(0,0, this.currentState, true, this.previousNumGround));
             this.previousNumGround = this.groundArray[this.groundArray.length-1].getSpriteNum();
+
             newPieceGenerated = true;
         }
 
@@ -59,8 +64,10 @@ Level.prototype.updateLevel = function () {
         if(this.roofArray[i].getX() <= 0 - this.roofArray[i].getWidth()){
 
             this.roofArray.splice(i,1);
+
             this.roofArray.push(new TrackSprite(0,0, this.currentState, false, this.previousNumRoof));
             this.previousNumRoof = this.roofArray[this.roofArray.length-1].getSpriteNum();
+
             newPieceGenerated = true;
             
             //Update Level Distance
