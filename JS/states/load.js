@@ -9,13 +9,28 @@ var LoadState = {
         var loadingLabel = game.add.text(80, 150, "loading...", {font: "30px Courier", fill: "#ffffff"});
 
         //Load all the game assets.
-        game.load.image("player", "GFX/heli.png");
+        game.load.image("player", "GFX/heli2.png");
+        game.load.image("drone", "GFX/drone.png");
         game.load.image("small", "GFX/small.png");
+        game.load.image("small_R", "GFX/small_R.png");
         game.load.image("medium", "GFX/medium.png");
+        game.load.image("medium_R", "GFX/medium_R.png");
         game.load.image("big", "GFX/big.png");
+        game.load.image("big2", "GFX/big2.png");
+        game.load.image("big3", "GFX/big3.png");
         game.load.image("xBig", "GFX/xBig.png");
+        game.load.image("xBig2", "GFX/xBig2.png");
+        game.load.image("xBig3", "GFX/xBig3.png");
         game.load.image("xxBig", "GFX/xxBig.png");
         game.load.image("xxxBig", "GFX/xxxBig.png");
+        game.load.image("big_R", "GFX/big_R.png");
+        game.load.image("big2_R", "GFX/big2_R.png");
+        game.load.image("big3_R", "GFX/big3_R.png");
+        game.load.image("xBig_R", "GFX/xBig_R.png");
+        game.load.image("xBig2_R", "GFX/xBig2_R.png");
+        game.load.image("xBig3_R", "GFX/xBig3_R.png");
+        game.load.image("xxBig_R", "GFX/xxBig_R.png");
+        game.load.image("xxxBig_R", "GFX/xxxBig_R.png");
         game.load.image("playN","GFX/PlayNormal.png");
         game.load.image("playH","GFX/PlayHover.png");
         game.load.image("highScoreN","GFX/highscoresNormal.png");

@@ -8,6 +8,7 @@ var Button = function(x,y,normalImgID,hoverImgID,onClickFunc){
     this.hoverIMG = hoverImgID;
     this.onClickFunc = onClickFunc;
     this.img = null;
+    
     this.switchToNorm = function(){
         if(this.img!=null) {
             this.img.kill();
@@ -19,6 +20,7 @@ var Button = function(x,y,normalImgID,hoverImgID,onClickFunc){
         this.img.events.onInputDown.add(this.onClickFunc,this);
 
     };
+    
     this.switchToHover=function(){
         if(this.img!=null) {
             this.img.kill();
