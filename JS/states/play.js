@@ -70,6 +70,9 @@ var PlayState = {
                 console.log("Player Spotted");
                 this.drone.matchSpeed(this.player.sprite);
                 this.drone.attackPattern(this.player.sprite);
+            }else{
+                
+                this.drone.movePosition(LEVELSPEEDX);
             }
         }
 
@@ -124,18 +127,6 @@ var PlayState = {
         parent.drone.explode();
         parent.gameOver();
     },
-    gameOver: function(){
-        var parent  = PlayState;
-        parent.player.endGame(function () {
-            if(parent.highscoreSystem.isHighScore(parent.level.getLevelDistance())){
-                console.log("HighScore");
-                var name = window.prompt("You got a highscore! Please enter your name:");
-                parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
-            }
-            //Reset game.
-            LEVELSPEEDX = -80;
-            game.state.start(STATES.LOAD);
-        })},
     
     gameOver: function(){
         var parent  = PlayState;

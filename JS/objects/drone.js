@@ -13,6 +13,7 @@ var Drone = function(x, y){
     this.x = x;
     this.y = y;
     this.sprite = game.add.sprite(this.x, this.y, "drone");
+    this.sprite.frame = 0;
 
     this.velY = 2;
     this.velX = 0;
@@ -40,9 +41,10 @@ var Drone = function(x, y){
 //Tells if the sprite passed in is within range.
 Drone.prototype.canSee = function(otherSprite){
     
-    if(otherSprite.x >= otherSprite.x - this.visionRange){
+    if(otherSprite.x >= this.sprite.x - this.visionRange){
         
         this.attacking = true;
+        this.sprite.frame = 1;
         return true;
     }else{
         

@@ -10,7 +10,7 @@ var LoadState = {
 
         //Load all the game assets.
         game.load.image("player", "GFX/heli2.png");
-        game.load.image("drone", "GFX/drone.png");
+        //game.load.image("drone", "GFX/drone.png");
         game.load.image("small", "GFX/small.png");
         game.load.image("small_R", "GFX/small_R.png");
         game.load.image("medium", "GFX/medium.png");
@@ -37,10 +37,16 @@ var LoadState = {
         game.load.image("highScoreH","GFX/highscoresHover.png");
         game.load.image("backN","GFX/BackNormal.png");
         game.load.image("backH","GFX/backHover.png");
-        game.load.image("bg","GFX/bg.jpg");
+        game.load.image("bg","GFX/bg.png");
+        game.load.image("hsbg","GFX/hsbg.png");
         game.load.audio("helicopter","SFX/helicopter.mp3");
         game.load.audio("explosionSound","SFX/explosion.mp3");
+        game.load.spritesheet("drone", "GFX/drone.png", 38, 32);
         game.load.spritesheet("explosion","GFX/explosion.png",64,64,16);
+        game.load.spritesheet("playBTN", "GFX/playBTN.png", 200, 125);
+        game.load.spritesheet("hsBTN", "GFX/hsBTN.png", 450, 125);
+        game.load.spritesheet("aboutBTN", "GFX/aboutBTN.png", 250, 125);
+        game.load.spritesheet("backBTN", "GFX/backBTN.png", 250, 125);
 
         //Start the physics system.
         game.physics.startSystem(Phaser.Physics.ARCADE);
