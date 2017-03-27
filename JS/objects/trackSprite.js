@@ -16,7 +16,6 @@ var TrackSprite = function(x, y, currentState, upright, previousNum) {
     to one another.*/
     
     this.selector = previousNum;
-
     
     switch (currentState) {
             
@@ -36,7 +35,7 @@ var TrackSprite = function(x, y, currentState, upright, previousNum) {
             break;
             
         case "Hard": 
-
+            
             do{
                 this.selector = Math.floor(Math.random() * 6);
             }while(this.selector == previousNum);
