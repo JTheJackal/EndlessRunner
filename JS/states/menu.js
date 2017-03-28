@@ -17,6 +17,5 @@ var MenuState =  {
         this.btnStart = game.add.button(game.world.centerX - 100, game.world.centerY - 100, "playBTN", this.startOnClick, this, 1, 0, 0);
         this.btnHighScore = game.add.button(game.world.centerX - 225, game.world.centerY, "hsBTN", this.highscoreOnClick, this, 1, 0, 0);
         this.btnAbout = game.add.button(game.world.centerX - 125, game.world.centerY + 100, "aboutBTN", this.aboutOnClick, this, 1, 0, 0);
-        //this.btnHighScore = new Button(gameWidth / 2,(gameHeight/2)/2 + gameHeight/2,'highScoreN','highScoreH',this.highscoreOnClick);
     }
 };
