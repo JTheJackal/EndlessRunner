@@ -24,12 +24,12 @@ var Level = function () {
     //initLevel - Add level sprites to the array & update sprite Location
     for(var i = 0; i<this.TRACKPIECENUM; i++){
         this.groundArray.push(new TrackSprite(0,0, this.currentState, true, this.previousNumGround));
-        this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() -  this.offset),game.world.height - this.groundArray[i].getHeight());
+        this.groundArray[i].setPosition(i * (this.groundArray[i].getWidth() -  this.offset),game.world.height - this.groundArray[i].getHeight() + 20);
         this.previousNumGround = this.groundArray[this.groundArray.length-1].getSpriteNum();
         
         //Add sprites to roof array.
         this.roofArray.push(new TrackSprite(0,0, this.currentState, false, this.previousNumRoof));
-        this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - this.offset), 0);
+        this.roofArray[i].setPosition(i * (this.roofArray[i].getWidth() - this.offset), 20);
         this.previousNumRoof = this.roofArray[this.roofArray.length-1].getSpriteNum();
     }
 
@@ -78,8 +78,8 @@ Level.prototype.updateLevel = function () {
         
         for(var j = 1; j < length; j++){
 
-            this.groundArray[j].setPosition(this.groundArray[j-1].getX() + (width - this.offset), game.world.height - this.groundArray[j].getHeight());
-            this.roofArray[j].setPosition(this.roofArray[j-1].getX() + (width - this.offset), 0);
+            this.groundArray[j].setPosition(this.groundArray[j-1].getX() + (width - this.offset), game.world.height - this.groundArray[j].getHeight() + 20);
+            this.roofArray[j].setPosition(this.roofArray[j-1].getX() + (width - this.offset), 20);
         }
     }
     
