@@ -58,20 +58,36 @@ var PlayState = {
         //If there is a drone active...
         if(this.droneExists){
             
+            console.log("There is an active drone...");
+            
             //Apply movement if the drone is not in it's attack state.
             if(!this.drone.attacking){
 
-                this.drone.movePosition(LEVELSPEEDX, LEVELSPEEDY);
+                //this.drone.movePosition(LEVELSPEEDX, LEVELSPEEDY);
+                
+                //console.log("testing for attack");
+            }
+            
+            if(this.drone.preparedToAttack(levelDistance)){
+                
+                this.drone.attack();
             }
 
             //Check for the player being within the drone's range.
-            if(this.drone.canSee(this.player.sprite)){
+            if(this.drone.canSee(this.player.sprite) && !this.drone.attacking){
 
-                console.log("Player Spotted");
+                if(!this.drone.distancePrepared){
+                    
+                    this.drone.startDistance = levelDistance;
+                    //console.log("Drone startDistance: " + this.drone.startDistance);
+                    this.drone.distancePrepared = true;
+                }
+                
                 this.drone.matchSpeed(this.player.sprite);
                 this.drone.attackPattern(this.player.sprite);
             }else{
                 
+                ///console.log("Drone is moving");
                 this.drone.movePosition(LEVELSPEEDX);
             }
         }
@@ -81,8 +97,8 @@ var PlayState = {
 
             this.droneExists = true;
             //Create a new Drone.
-            this.drone = new Drone(this.level.roofArray[this.level.roofArray.length -1].getX() + 32, this.level.roofArray[this.level.roofArray.length -1].getY()
-                                   + this.level.roofArray[this.level.roofArray.length -1].getHeight() + 48);
+            this.drone = new Drone(this.level.roofArray[this.level.roofArray.length -1].getX() + 32, 400);//this.level.roofArray[this.level.roofArray.length -1].getY()
+                                   //+ this.level.roofArray[this.level.roofArray.length -1].getHeight() + 48);
             
             this.level.baseLevelDistance = levelDistance;
         }
@@ -150,7 +166,7 @@ var PlayState = {
         this.endGame = false;
         this.droneExists = false;
         this.drone = null;
-        this.droneGenerationDistance = 25;
+        this.droneGenerationDistance = 30;
 
         this.previousDistance = 0;
 

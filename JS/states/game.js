@@ -18,6 +18,7 @@ const STATES = {
     SPLASH:"splash.js",
     MENU:"menu.js",
     PLAY:"playState",
+    ABOUT:"aboutState",
     HIGH_SCORE:"highscore"
 };
 
@@ -37,6 +38,7 @@ game.state.add(STATES.LOAD,LoadState);
 game.state.add(STATES.HIGH_SCORE,highscoreState);
 game.state.add(STATES.MENU,MenuState);
 game.state.add(STATES.PLAY,PlayState);
+game.state.add(STATES.ABOUT, aboutState);
 
 //Start State
 game.state.start(STATES.LOAD);

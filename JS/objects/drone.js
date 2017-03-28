@@ -21,8 +21,13 @@ var Drone = function(x, y){
     this.rotationMin=-20;
     this.rotationMax = 20;
     this.ascendForce = -70;
-    this.visionRange = 40;
+    this.visionRange = 150;
     this.attacking = false;
+    this.prepared = false;
+    this.distancePrepared = false;
+    this.prepareRange =  5;
+    this.startDistance = 0;
+    this.startRotation = 0;
 
     //enabled Physics
     game.physics.arcade.enable(this.sprite);
@@ -31,8 +36,8 @@ var Drone = function(x, y){
     this.sprite.body.bounce.y = 0.2;
 
     //Set anchor for a smoother roatation - Front of drone
-    //this.sprite.anchor.x = 0.5;
-    //this.sprite.anchor.y = 0.5;
+    this.sprite.anchor.x = 0.5;
+    this.sprite.anchor.y = 0.5;
 
     this.sprite.body.allowGravity = false;
     this.sprite.body.immovable = false;
@@ -43,7 +48,7 @@ Drone.prototype.canSee = function(otherSprite){
     
     if(otherSprite.x >= this.sprite.x - this.visionRange){
         
-        this.attacking = true;
+        //this.attacking = true;
         this.sprite.frame = 1;
         return true;
     }else{
@@ -76,11 +81,52 @@ Drone.prototype.matchSpeed = function(otherSprite){
     }
 };
 
+Drone.prototype.preparedToAttack = function(distance){
+    
+    if(this.startDistance != 0){
+        if(distance > this.startDistance + this.prepareRange){
+
+            //this.prepared = true;
+            return true;
+        }else{
+
+            return false;
+        }
+    }else{
+        
+        return false;
+    }
+};
+
+//Attack
+Drone.prototype.attack = function(){
+    
+    if(this.sprite.rotation >= 3){
+        
+        this.attacking = true;
+        this.sprite.body.allowGravity = false;
+    }else{
+        
+        this.sprite.rotation += 0.05;
+    }
+};
+
 //Move posisition of drone.
 Drone.prototype.movePosition = function(speedX, speedY){
     
     this.sprite.body.velocity.x = speedX;
 };
+
+Drone.prototype.isNear = function(otherSprite){
+    
+    if(this.sprite.x < otherSprite.x + 25){
+        
+        return true;
+    }else{
+        
+        return false;
+    }
+}
 
 Drone.prototype.explode = function () {
 

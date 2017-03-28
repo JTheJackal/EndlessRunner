@@ -15,6 +15,11 @@ var TrackSprite = function(x, y, currentState, upright, previousNum) {
     The do-while loops along with the previousNum arg will ensure no two buildings are placed next
     to one another.*/
     
+    this.createSprite(x, y, previousNum, currentState, upright);
+};
+
+TrackSprite.prototype.createSprite = function(x, y, previousNum, currentState, upright){
+    
     this.selector = previousNum;
     
     switch (currentState) {
@@ -194,13 +199,18 @@ var TrackSprite = function(x, y, currentState, upright, previousNum) {
                 break;
         }
     }
-
+    
     //Enable physics for the sprite. Allows collision detection.
     game.physics.arcade.enable(this.sprite);
-
+    
     //Remove gravity for this sprite.
     this.sprite.body.allowGravity = false;
     this.sprite.body.immovable = true;
+};
+
+TrackSprite.prototype.regenerate = function(x, y, currentState, upright, previousNum){
+    
+    this.createSprite(x, y, previousNum, currentState, upright);
 };
 
 //Set X & Y of sprite

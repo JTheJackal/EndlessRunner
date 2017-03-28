@@ -22,6 +22,7 @@ startY+=40;
         }
     },
     backOnClick:function(){
+        this.highScoreSystem.stopListening();
         game.state.start(STATES.MENU);
     },
     create:function(){
