@@ -21,7 +21,7 @@ var HighScoreSystem = function (callback) {
 
     //Variables for firebase
     var database = firebase.database();
-    var scoreRef = database.ref("scores/");
+    this.scoreRef = database.ref("scores/");
 
     //Variable for high score
     var highScores = [];
@@ -84,7 +84,7 @@ var HighScoreSystem = function (callback) {
     };
     //Sets the high score in firebase.
     this.setHighScores = function (name,score) {
-        scoreRef.child(firebase.auth().currentUser.uid).set({
+        this.scoreRef.child(firebase.auth().currentUser.uid).set({
             name:name,
             score:score,
             date:Date.now()
@@ -92,6 +92,10 @@ var HighScoreSystem = function (callback) {
     };
 
     //Retrieves the data from firebase.
-    scoreRef.on("value",getHighScores)
-
+    this.scoreRef.on("value",getHighScores)
 };
+
+HighScoreSystem.prototype.stopListening = function(){
+    
+    this.scoreRef.off();
+}

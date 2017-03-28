@@ -49,8 +49,11 @@ Level.prototype.updateLevel = function () {
         //Check Posistion and regenerate if need be.
         if(this.groundArray[i].getX() <= 0 - this.groundArray[i].getWidth()){
 
+            //this.groundArray.splice(i,1);
+            //this.groundArray.push( new TrackSprite(0,0, this.currentState, true, this.previousNumGround));
+            this.groundArray.push(this.groundArray[i]);
             this.groundArray.splice(i,1);
-            this.groundArray.push( new TrackSprite(0,0, this.currentState, true, this.previousNumGround));
+            this.groundArray[this.groundArray.length-1].regenerate(0, 0, this.currentState, true, this.previousNumGround);
             this.previousNumGround = this.groundArray[this.groundArray.length-1].getSpriteNum();
             newPieceGenerated = true;
         }
@@ -58,8 +61,10 @@ Level.prototype.updateLevel = function () {
         //Check position and regenerate if need be.
         if(this.roofArray[i].getX() <= 0 - this.roofArray[i].getWidth()){
 
+            this.roofArray.push(this.roofArray[i]);
             this.roofArray.splice(i,1);
-            this.roofArray.push(new TrackSprite(0,0, this.currentState, false, this.previousNumRoof));
+            //this.roofArray.push(new TrackSprite(0,0, this.currentState, false, this.previousNumRoof));
+            this.roofArray[this.roofArray.length-1].regenerate(0, 0, this.currentState, false, this.previousNumRoof);
             this.previousNumRoof = this.roofArray[this.roofArray.length-1].getSpriteNum();
             newPieceGenerated = true;
             

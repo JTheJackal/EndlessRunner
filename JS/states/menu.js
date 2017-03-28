@@ -9,7 +9,7 @@ var MenuState =  {
         game.state.start(STATES.HIGH_SCORE);
     },
     aboutOnClick:function(){
-        //Not yet implemented.
+        game.state.start(STATES.ABOUT);
     },
     create:function(){
         this.backgroundImg = game.add.image(0,0,'bg');
