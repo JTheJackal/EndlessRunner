@@ -7,7 +7,7 @@ var highscoreState =  {
 
         this.hsText = game.add.text(gameWidth/2,startY,"High Scores" ,{ font: 'Monotype Corsiva', fontSize: '36px', fill: '#FFFFFF' });
         this.hsText.anchor.setTo(0.5);
-startY+=40;
+        startY+=40;
 
         //Clear labels
 
@@ -30,7 +30,5 @@ startY+=40;
         //this.btnback= new Button(gameWidth / 2,gameHeight-60,'backN','backH',this.backOnClick);
         this.btnback = game.add.button(game.world.centerX - 125, gameHeight-140, "backBTN", this.backOnClick, this, 1, 0, 0);
         this.highScoreSystem = new HighScoreSystem(this.drawScores);
-}
-
-
+    }
 };

@@ -28,6 +28,12 @@ var Player = function(x, y){
     this.minX = game.world.width/2 - 200;
     this.maxX = game.world.width/2 + 200;
     this.sfx = game.add.audio("helicopter");
+    this.emitter = game.add.emitter(this.x - (this.sprite.width), this.y, 25);
+    this.emitter.makeParticles("fume");
+    this.emitter.gravity = 1;
+    this.emitter.setAlpha(1, 0, 1500);
+    this.emitter.setScale(2, 0, 1.2, 8, 3000);
+    this.emitter.start(false, 250, 2);
 
     //play audio
     this.sfx.loop = true;
@@ -94,6 +100,21 @@ Player.prototype.controlX = function (key) {
 
     this.sprite.body.velocity.x = this.velX;
 };
+
+Player.prototype.updateParticles = function(ascending){
+    
+    if(ascending){
+        
+        this.emitter.on = true;
+        this.emitter.minParticleSpeed.set(-10, 50);
+        this.emitter.maxParticleSpeed.set(-50, 200);
+        this.emitter.emitX = this.sprite.x - 20;
+        this.emitter.emitY = this.sprite.y + 24;
+    }else{
+        
+        this.emitter.on = false;
+    }
+}
 
 Player.prototype.endGame = function (onAnimationComplete) {
     //Stop current Sound

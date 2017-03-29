@@ -13,6 +13,10 @@ var PlayState = {
         //Check to if helicopter needs to ascend.
         if (this.jumpKey.isDown) {
             this.player.ascend();
+            this.ascending = true;
+        }else{
+            
+            this.ascending = false;
         }
         
         //Check if helicopter needs to move
@@ -167,9 +171,23 @@ var PlayState = {
         this.droneExists = false;
         this.drone = null;
         this.droneGenerationDistance = 30;
+        this.ascending = false;
+        this.emitter = game.add.emitter(game.world.centerX, 0, 400);
 
         this.previousDistance = 0;
 
+        //Set up the rain.
+        this.emitter.width = game.world.width;
+        this.emitter.makeParticles("rain");
+        this.emitter.minParticleScale = 0.8;
+        this.emitter.maxParticleScale = 1.5;
+        this.emitter.setAlpha(0.7, 0, 3000);
+        this.emitter.setYSpeed(100, 200);
+        this.emitter.setXSpeed(-50, -150);
+        this.emitter.minRotation = 0;
+        this.emitter.maxRotation = 0;
+        this.emitter.start(false, 1600, 5, 0);
+        
         //Display level Distance
         this.LevelDistance = game.add.text(10, 10, "Distance = " + this.level.getLevelDistance() + "m", {
             font: "24px Courier",
@@ -191,8 +209,11 @@ var PlayState = {
     
     update: function () {
 
-        //Update Level
+        //Update Level.
         this.level.updateLevel();
+        
+        //Update helicopter particles.
+        this.player.updateParticles(this.ascending);
         
         //Update drones
         this.handleDrones();
@@ -207,7 +228,7 @@ var PlayState = {
         this.gameDifficulty();
 
         //Display level Distance
-        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m\n" + "Speed: " + LEVELSPEEDX + "\nDifficulty: " + this.level.currentState);
+        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m" + "     Speed: " + LEVELSPEEDX + "      Difficulty: " + this.level.currentState);
         
         //Make the UI group always on top.
         game.world.bringToTop(this.UIGroup);

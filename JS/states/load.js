@@ -31,6 +31,8 @@ var LoadState = {
         game.load.image("xBig3_R", "GFX/xBig3_R.png");
         game.load.image("xxBig_R", "GFX/xxBig_R.png");
         game.load.image("xxxBig_R", "GFX/xxxBig_R.png");
+        game.load.image("fume", "GFX/fume.png");
+        game.load.image("rain", "GFX/rain.png");
         game.load.image("playN","GFX/PlayNormal.png");
         game.load.image("playH","GFX/PlayHover.png");
         game.load.image("highScoreN","GFX/highscoresNormal.png");
