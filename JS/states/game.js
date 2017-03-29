@@ -25,7 +25,7 @@ const STATES = {
 //global variables
 var gameWidth = 800;
 var gameHeight = 600;
-var LEVELSPEEDX = -110;
+var LEVELSPEEDX = -80;
 const ORIGSPEEDX = LEVELSPEEDX;
 const LEVELSPEEDY = 0;
 

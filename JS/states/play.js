@@ -154,7 +154,9 @@ var PlayState = {
             if(parent.highscoreSystem.isHighScore(parent.level.getLevelDistance())){
                 console.log("HighScore");
                 var name = window.prompt("You got a highscore! Please enter your name:");
-                parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
+                if(name !=null && name != ""){
+                    parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
+                }
             }
             //Reset game.
             LEVELSPEEDX = -80;
@@ -228,7 +230,7 @@ var PlayState = {
         this.gameDifficulty();
 
         //Display level Distance
-        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m" + "     Speed: " + LEVELSPEEDX + "      Difficulty: " + this.level.currentState);
+        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m" + "     Speed: " + Math.abs(LEVELSPEEDX) + "      Difficulty: " + this.level.currentState);
         
         //Make the UI group always on top.
         game.world.bringToTop(this.UIGroup);

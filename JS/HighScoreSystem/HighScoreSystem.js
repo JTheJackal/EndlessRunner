@@ -79,7 +79,7 @@ var HighScoreSystem = function (callback) {
                 tmpScores[i] = highScores[i];
             }
         }
-
+    console.log(tmpScores);
         return tmpScores
     };
     //Sets the high score in firebase.
@@ -98,4 +98,4 @@ var HighScoreSystem = function (callback) {
 HighScoreSystem.prototype.stopListening = function(){
     
     this.scoreRef.off();
-}
+};
