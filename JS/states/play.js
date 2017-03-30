@@ -62,38 +62,50 @@ var PlayState = {
         //If there is a drone active...
         if(this.droneExists){
             
-            console.log("There is an active drone...");
-            
-            //Apply movement if the drone is not in it's attack state.
-            if(!this.drone.attacking){
-
-                //this.drone.movePosition(LEVELSPEEDX, LEVELSPEEDY);
-                
-                //console.log("testing for attack");
-            }
-            
             if(this.drone.preparedToAttack(levelDistance)){
                 
                 this.drone.attack();
             }
-
-            //Check for the player being within the drone's range.
-            if(this.drone.canSee(this.player.sprite) && !this.drone.attacking){
-
-                if(!this.drone.distancePrepared){
-                    
-                    this.drone.startDistance = levelDistance;
-                    //console.log("Drone startDistance: " + this.drone.startDistance);
-                    this.drone.distancePrepared = true;
-                }
+            
+            //If the drone hasn't seen the player yet...
+            if(!this.drone.spotted){
                 
-                this.drone.matchSpeed(this.player.sprite);
-                this.drone.attackPattern(this.player.sprite);
+                //Check for the player being within the drone's range.
+                if(this.drone.canSee(this.player.sprite) && !this.drone.attacking){
+
+                    this.drone.spotted = true;
+                    
+                }else{
+
+                    ///console.log("Drone is moving");
+                    this.drone.movePosition(LEVELSPEEDX);
+                }
             }else{
                 
-                ///console.log("Drone is moving");
-                this.drone.movePosition(LEVELSPEEDX);
+                console.log("Drone has spotted you");
+                
+                //If the drone hasn't noted the distance the player was first spotted at yet...
+                if(!this.drone.distancePrepared){
+
+                    //Take note of the distance the drone sees the player from.
+                    this.drone.startDistance = levelDistance;
+                    this.drone.distancePrepared = true;
+                    
+                    console.log("distance prepared");
+                }
+
+                //If the drone isn't ready to attack yet...
+                if(!this.drone.attacking){
+                    
+                    //Match the speed of the player and follow the Y-axis movements.
+                    this.drone.matchSpeed(this.player.sprite);
+                    this.drone.attackPattern(this.player.sprite);
+                }else{
+                    
+                    this.drone.movePosition(LEVELSPEEDX + 15);
+                }
             }
+            
         }
 
         //Create a drone at random intervals.
@@ -154,7 +166,9 @@ var PlayState = {
             if(parent.highscoreSystem.isHighScore(parent.level.getLevelDistance())){
                 console.log("HighScore");
                 var name = window.prompt("You got a highscore! Please enter your name:");
-                parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
+                if(name !=null && name != ""){
+                    parent.highscoreSystem.setHighScores(name,parent.level.getLevelDistance())
+                }
             }
             //Reset game.
             LEVELSPEEDX = -80;
@@ -197,7 +211,7 @@ var PlayState = {
         //Assign the UI group.
         this.UIGroup.add(this.LevelDistance);
 
-        //Create a variable for key press for player jump
+        //Create a variable for key press for player jump and movement
         this.jumpKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.cursors = game.input.keyboard.createCursorKeys();
 
@@ -228,7 +242,7 @@ var PlayState = {
         this.gameDifficulty();
 
         //Display level Distance
-        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m" + "     Speed: " + LEVELSPEEDX + "      Difficulty: " + this.level.currentState);
+        this.LevelDistance.setText("Distance: " + this.level.getLevelDistance() + "m" + "     Speed: " + Math.abs(LEVELSPEEDX) + "      Difficulty: " + this.level.currentState);
         
         //Make the UI group always on top.
         game.world.bringToTop(this.UIGroup);
@@ -238,6 +252,7 @@ var PlayState = {
         
         //For debugging collision boxes only.
         //game.debug.body(this.player.sprite);
+        //game.debug.body(this.drone.sprite);
     }
 };
 

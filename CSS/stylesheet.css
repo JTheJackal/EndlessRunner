@@ -1,0 +1,21 @@
+body{
+    
+    background-color: black;
+}
+
+#container{
+    
+    margin: auto;
+    padding-top: 50px;
+    width: 1000px;
+    height: 650px;
+    background-image: url(../GFX/divBG.png);
+}
+
+#gameDiv{
+    
+    margin: auto;
+    width: 800px;
+    height: 600px;
+    background-color: black;    
+}

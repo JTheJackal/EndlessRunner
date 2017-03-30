@@ -25,12 +25,12 @@ const STATES = {
 //global variables
 var gameWidth = 800;
 var gameHeight = 600;
-var LEVELSPEEDX = -110;
+var LEVELSPEEDX = -80;
 const ORIGSPEEDX = LEVELSPEEDX;
 const LEVELSPEEDY = 0;
 
 //Create an instance of the game.
-var game = new Phaser.Game(gameWidth,gameHeight,Phaser.CANVAS,"canvas");
+var game = new Phaser.Game(gameWidth,gameHeight,Phaser.CANVAS,"gameDiv");
 
 //Add states to the game
 game.state.add(STATES.BOOT,BootState);
