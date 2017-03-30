@@ -24,10 +24,12 @@ var Drone = function(x, y){
     this.visionRange = 150;
     this.attacking = false;
     this.prepared = false;
+    this.spotted = false;
     this.distancePrepared = false;
     this.prepareRange =  5;
     this.startDistance = 0;
     this.startRotation = 0;
+    this.charge = false;
 
     //enabled Physics
     game.physics.arcade.enable(this.sprite);
@@ -86,6 +88,7 @@ Drone.prototype.preparedToAttack = function(distance){
     if(this.startDistance != 0){
         if(distance > this.startDistance + this.prepareRange){
 
+            this.charge = true;
             //this.prepared = true;
             return true;
         }else{
